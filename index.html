@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>René-Voice-Creator</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Theme Color for Browser UI -->
+    <meta name="theme-color" content="#111827" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-background': '#111827',
+              'brand-surface': '#1f2937',
+              'brand-primary': '#22d3ee',
+              'brand-secondary': '#64748b',
+              'brand-text': '#e5e7eb',
+              'brand-text-dim': '#9ca3af',
+            },
+          },
+        },
+      }
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+          "react": "https://esm.sh/react@^19.1.0",
+          "react/": "https://esm.sh/react@^19.1.0/",
+          "@google/genai": "https://esm.sh/@google/genai@^1.9.0"
+        }
+      }
+    </script>
+    <script>
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </head>
+  <body class="bg-brand-background">
+    <div id="root"></div>
+  </body>
+</html>
